@@ -246,3 +246,31 @@ def test_returned_values_are_unique():
     expected = [['Louboutin Flip Flops', 5], ['Eau de Fromage', 10], ['test_name', 888]]
 
     assert format_stock(input) == expected
+
+
+def test_stock_with_same_name_will_add_amount_in_stock():
+    """placeholder
+    """
+
+    input = [
+        {
+            'item_name': 'Louboutin Flip Flops',
+            'features': ['Designer', 'Faux-Faux-Leather'],
+            'department': 'Footwear',
+            'amount_in_stock': 5
+        }, {
+            'item_name': 'Eau de Fromage',
+            'features': ['Fragrance', 'Designer'],
+            'department': 'Beauty',
+            'amount_in_stock': 10
+        }, {
+            'item_name': 'Eau de Fromage',
+            'features': ['Fragrance', 'Designer'],
+            'department': 'Beauty',
+            'amount_in_stock': 888
+        }
+    ]
+
+    expected = [['Louboutin Flip Flops', 5], ['Eau de Fromage', 898]]
+
+    assert format_stock(input) == expected
