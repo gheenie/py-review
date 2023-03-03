@@ -7,8 +7,13 @@ and return them in a simpler data structure.
 """
 
 
-import copy
-
-
 def format_departments(staffs):
-    return [[staff['department']] for staff in staffs]
+    unique_departments = []
+
+    for staff in staffs:
+        department = [staff['department']]
+
+        if department not in unique_departments:
+            unique_departments.append(department)
+
+    return unique_departments
