@@ -10,9 +10,9 @@ and return them in a simpler data structure.
 def format_departments(staffs):
     """Transforms a list of staff dicts into a list of unique [department].
 
-    Get the 'department' values from a list of dicts representing each staff.
-    Put each department in a single-item list.
-    Remove duplicates and return them as 
+    Gets the 'department' values from a list of dicts representing each staff.
+    Puts each department in a single-item list.
+    Removes duplicates and returns them as 
     one list of lists representing each unique department.
 
     Args:
@@ -43,7 +43,8 @@ def format_stock(stock):
     """Transforms a list of item dicts into a list of [unique item_name, total amount_in_stock].
 
     Gets the 'item_name' and 'amount_in_stock' values from a list of dicts representing each item.
-    Makes item_name unique, with duplicate items having their amount_in_stock summed.
+    Puts each item name and stock amount in a list.
+    In cases of duplicate item names, keep item names unique and add to the amount_in_stock instead.
     Return them as one list of lists representing each unique item.
 
     Args:
@@ -59,7 +60,7 @@ def format_stock(stock):
         Item names are unique.
     """
 
-    unique_stock = []
+    formatted_stock = []
     # Key will be an item name, value will be a ref to the corresponding element in unique_stock.
     existing_items = {}
 
@@ -70,13 +71,13 @@ def format_stock(stock):
         if item_name not in existing_items:
             formatted_item = [item_name, amount_in_stock]
 
-            unique_stock.append(formatted_item)
+            formatted_stock.append(formatted_item)
 
             existing_items[item_name] = formatted_item
         else:
             existing_items[item_name][1] += amount_in_stock
     
-    return unique_stock
+    return formatted_stock
 
 
 def format_features(stock):
