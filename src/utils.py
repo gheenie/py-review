@@ -6,5 +6,9 @@ These utility functions will select smaller bits of data
 and return them in a simpler data structure.
 """
 
-def format_departments():
-    pass
+
+import copy
+
+
+def format_departments(staffs):
+    return [[staff['department']] for staff in staffs]
