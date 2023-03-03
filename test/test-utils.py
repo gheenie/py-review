@@ -2,12 +2,12 @@ from src.utils import (format_departments)
 
 
 def test_input_with_correct_shape_and_data():
-    """Happiest path where the input has valid keys.
+    """The input has a 'department' key nested within a list of dictionaries.
 
-    Input a list of dictionaries, with
-    each dictionary containing a 'department' key.
-    Expect a list of list, with the value of 'department'
-    in each second-level list.
+    The input is a list of dictionaries, with each dictionary 
+    containing a 'department' key.
+    Expects a list of lists, with only one item in each second-level list.
+    That item is the value of 'department'
     """
 
     input = [
