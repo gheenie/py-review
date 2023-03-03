@@ -76,3 +76,19 @@ def format_stock(stock):
             existing_items[item_name][1] += amount_in_stock
     
     return unique_stock
+
+
+def format_features(stock):
+    """placeholder
+    """
+    
+    formatted_features = []
+
+    for item in stock:
+        for feature in item['features']:
+            formatted_feature = [feature]
+
+            if formatted_feature not in formatted_features:
+                formatted_features.append(formatted_feature)
+
+    return formatted_features
