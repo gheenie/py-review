@@ -31,6 +31,12 @@ def test_input_with_correct_shape_and_data():
 
 
 def test_input_not_mutated():
+    """Enforces function purity.
+
+    Expects input and output mem refs to be different.
+    Expects input and expected values to be equal.
+    """
+
     input = [
         {
             'staff_id': 1,
@@ -45,7 +51,8 @@ def test_input_not_mutated():
             'department': 'Footwear'
         }
     ]
-    expected = input = [
+
+    expected = [
         {
             'staff_id': 1,
             'first_name': 'Duncan',
