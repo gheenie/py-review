@@ -8,7 +8,7 @@ and return them in a simpler data structure.
 
 
 def format_departments(staffs):
-    """Get unique 'department' values from a List of staff Dicts.
+    """Transforms a list of staff dicts into a list of unique [department].
 
     Get the 'department' values from a list of dicts representing each staff, 
     make them unique,
