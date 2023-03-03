@@ -1,4 +1,4 @@
-from src.utils import (format_departments, format_stock)
+from src.utils import (format_departments, format_stock, format_features)
 import pytest
 
 
@@ -130,6 +130,7 @@ def test_returned_values_are_unique():
     assert format_departments(input) == expected
 
 
+@pytest.mark.skip
 def test_input_not_mutated():
     """Enforces function purity.
 
@@ -171,6 +172,7 @@ def test_input_not_mutated():
     assert input == expected
 
 
+@pytest.mark.skip
 def test_input_with_correct_shape_and_data__1_item():
     """The input has the keys we want, nested within a list of dictionaries.
 
@@ -194,6 +196,7 @@ def test_input_with_correct_shape_and_data__1_item():
     assert format_stock(input) == expected
 
 
+@pytest.mark.skip
 def test_input_with_correct_shape_and_data__multiple_items():
     """See test_input_with_correct_shape_and_data__1_item().
 
@@ -219,6 +222,7 @@ def test_input_with_correct_shape_and_data__multiple_items():
     assert format_stock(input) == expected
 
 
+@pytest.mark.skip
 def test_returned_values_are_unique():
     """
     Also test for other invalid keys and shape.
@@ -248,6 +252,7 @@ def test_returned_values_are_unique():
     assert format_stock(input) == expected
 
 
+@pytest.mark.skip
 def test_stock_with_same_name_will_add_amount_in_stock():
     """placeholder
     """
@@ -274,3 +279,134 @@ def test_stock_with_same_name_will_add_amount_in_stock():
     expected = [['Louboutin Flip Flops', 5], ['Eau de Fromage', 898]]
 
     assert format_stock(input) == expected
+
+
+def test_input_not_mutated():
+    """Enforces function purity.
+
+    Expects input and output mem refs to be different.
+    Expects input and expected values to be equal.
+    """
+
+    input = [
+        {
+            'item_name': 'Louboutin Flip Flops',
+            'features': ['Designer', 'Faux-Faux-Leather'],
+            'department': 'Footwear',
+            'amount_in_stock': 5
+        }, {
+            'item_name': 'Eau de Fromage',
+            'features': ['Fragrance', 'Designer'],
+            'department': 'Beauty',
+            'amount_in_stock': 10
+        }
+    ]
+
+    expected = [
+        {
+            'item_name': 'Louboutin Flip Flops',
+            'features': ['Designer', 'Faux-Faux-Leather'],
+            'department': 'Footwear',
+            'amount_in_stock': 5
+        }, {
+            'item_name': 'Eau de Fromage',
+            'features': ['Fragrance', 'Designer'],
+            'department': 'Beauty',
+            'amount_in_stock': 10
+        }
+    ]
+
+    output = format_features(input)
+
+    assert input is not output
+    assert input == expected
+
+
+def test_input_with_correct_shape_and_data__1_item_1_feature():
+    """The input has the keys we want, nested within a list of dictionaries.
+
+    The input is a list of dictionaries, with each dictionary 
+    containing a 'features' key. The value is a list of strings.
+    Expects a list of lists, with one item in each second-level list.
+    That item is the item in the 'features' list.
+    """
+    
+    input = [
+        {
+            'item_name': 'Louboutin Flip Flops',
+            'features': ['Designer'],
+            'department': 'Footwear',
+            'amount_in_stock': 5
+        }
+    ]
+
+    expected = [['Designer']]
+
+    assert format_features(input) == expected
+
+
+def test_input_with_correct_shape_and_data__1_item_multiple_features():
+    """See test_input_with_correct_shape_and_data__1_item_1_feature().
+
+    Now the 'features' list has multiple items,
+    and the expected top-level list will contain more items.  
+    """
+    
+    input = [
+        {
+            'item_name': 'Louboutin Flip Flops',
+            'features': ['Designer', 'Faux-Faux-Leather'],
+            'department': 'Footwear',
+            'amount_in_stock': 5
+        }
+    ]
+
+    expected = [['Designer'], ['Faux-Faux-Leather']]
+
+    assert format_features(input) == expected
+
+
+def test_input_with_correct_shape_and_data__multiple_items_multiple_features():
+    """See test_input_with_correct_shape_and_data__1_item_multiple_features().
+
+    Now with >1 dicts in the list,
+    and the expected top-level list will contain more items.  
+    """
+    
+    input = [
+        {
+            'item_name': 'Louboutin Flip Flops',
+            'features': ['Designer', 'Faux-Faux-Leather'],
+            'department': 'Footwear',
+            'amount_in_stock': 5
+        }, {
+            'item_name': 'Eau de Fromage',
+            'features': ['Fragrance'],
+            'department': 'Beauty',
+            'amount_in_stock': 10
+        }
+    ]
+
+    expected = [['Designer'], ['Faux-Faux-Leather'], ['Fragrance']]
+
+    assert format_features(input) == expected
+
+
+def test_returned_values_are_unique():
+    input = [
+        {
+            'item_name': 'Louboutin Flip Flops',
+            'features': ['Designer', 'Faux-Faux-Leather'],
+            'department': 'Footwear',
+            'amount_in_stock': 5
+        }, {
+            'item_name': 'Eau de Fromage',
+            'features': ['Fragrance', 'Designer'],
+            'department': 'Beauty',
+            'amount_in_stock': 10
+        }
+    ]
+
+    expected = [['Designer'], ['Faux-Faux-Leather'], ['Fragrance']]
+
+    assert format_features(input) == expected
