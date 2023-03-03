@@ -1,6 +1,49 @@
 from src.utils import (format_departments)
 
 
+def test_input_not_mutated():
+    """Enforces function purity.
+
+    Expects input and output mem refs to be different.
+    Expects input and expected values to be equal.
+    """
+
+    input = [
+        {
+            'staff_id': 1,
+            'first_name': 'Duncan',
+            'last_name': 'Crawley',
+            'department': 'Beauty'
+        },
+        {
+            'staff_id': 2,
+            'first_name': 'Cat',
+            'last_name': 'Hoang',
+            'department': 'Footwear'
+        }
+    ]
+
+    expected = [
+        {
+            'staff_id': 1,
+            'first_name': 'Duncan',
+            'last_name': 'Crawley',
+            'department': 'Beauty'
+        },
+        {
+            'staff_id': 2,
+            'first_name': 'Cat',
+            'last_name': 'Hoang',
+            'department': 'Footwear'
+        }
+    ]
+
+    output = format_departments(input)
+
+    assert input is not output
+    assert input == expected
+
+
 def test_input_with_correct_shape_and_data():
     """The input has a 'department' key nested within a list of dictionaries.
 
@@ -55,11 +98,8 @@ def test_input_with_valid_desired_key__other_keys_and_shape_are_invalid():
     assert format_departments(input) == expected
 
 
-def test_input_not_mutated():
-    """Enforces function purity.
-
-    Expects input and output mem refs to be different.
-    Expects input and expected values to be equal.
+def test_returned_departments_are_unique():
+    """Ensures unique returned values.
     """
 
     input = [
@@ -74,25 +114,15 @@ def test_input_not_mutated():
             'first_name': 'Cat',
             'last_name': 'Hoang',
             'department': 'Footwear'
-        }
-    ]
-
-    expected = [
-        {
-            'staff_id': 1,
-            'first_name': 'Duncan',
-            'last_name': 'Crawley',
-            'department': 'Beauty'
         },
         {
-            'staff_id': 2,
-            'first_name': 'Cat',
-            'last_name': 'Hoang',
+            'staff_id': 3,
+            'first_name': 'random',
+            'last_name': 'person',
             'department': 'Footwear'
         }
     ]
 
-    output = format_departments(input)
+    expected = [['Beauty'], ['Footwear']]
 
-    assert input is not output
-    assert input == expected
+    assert format_departments(input) == expected
