@@ -10,9 +10,10 @@ and return them in a simpler data structure.
 def format_departments(staffs):
     """Transforms a list of staff dicts into a list of unique [department].
 
-    Get the 'department' values from a list of dicts representing each staff, 
-    make them unique,
-    and return them as one list of lists representing each unique department.
+    Get the 'department' values from a list of dicts representing each staff.
+    Put each department in a single-item list.
+    Remove duplicates and return them as 
+    one list of lists representing each unique department.
 
     Args:
         staffs:
@@ -27,15 +28,15 @@ def format_departments(staffs):
         Items of the top-level list are unique.
     """
 
-    unique_departments = []
+    formatted_departments = []
 
     for staff in staffs:
         department = [staff['department']]
 
-        if department not in unique_departments:
-            unique_departments.append(department)
+        if department not in formatted_departments:
+            formatted_departments.append(department)
 
-    return unique_departments
+    return formatted_departments
 
 
 def format_stock(stock):
