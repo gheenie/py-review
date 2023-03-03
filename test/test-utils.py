@@ -2,7 +2,7 @@ from src.utils import (format_departments)
 
 
 def test_input_with_correct_shape_and_data():
-    """Happiest path where the input is 'correct'.
+    """Happiest path where the input has valid keys.
 
     Input a list of dictionaries, with
     each dictionary containing a 'department' key.
@@ -21,6 +21,31 @@ def test_input_with_correct_shape_and_data():
             'staff_id': 2,
             'first_name': 'Cat',
             'last_name': 'Hoang',
+            'department': 'Footwear'
+        }
+    ]
+
+    expected = [['Beauty'], ['Footwear']]
+
+    assert format_departments(input) == expected
+
+
+def test_input_with_valid_desired_key__other_keys_and_shape_are_invalid():
+    """The key we want is valid, but other data isn't.
+
+    See test_input_with_correct_shape_and_data().
+    Now the data we're not accessing is not the same as
+    what's retrieved from the database.
+    """
+
+    input = [
+        {
+            'random_key': 'anything',
+            'staff_id': 999,
+            'department': 'Beauty'
+        },
+        {
+            'wrong_shape': 2,
             'department': 'Footwear'
         }
     ]
